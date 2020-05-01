@@ -58,6 +58,26 @@ public class LinkedList {
         }
     }
 
+    public int search(String value) {
+        Node temp = this.getHead();
+        boolean found = false;
+        int index = 0;
+        while (temp != null){
+            ++index;
+            if(temp.getValue().equals(value)){
+                found = true;
+                return index;
+            }
+            temp = temp.getNextNode();
+        }
+        if(found){
+            return index;
+        }else{
+            return 0;
+        }
+
+    }
+
 
 
     @Override

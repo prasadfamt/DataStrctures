@@ -17,7 +17,10 @@ public class LinkedListTest {
         linkedList.add("9");
         System.out.println(linkedList);
 
+        System.out.println("Value found at: " + linkedList.search("0"));
+
         linkedList.display();
+
 
     }
 }
