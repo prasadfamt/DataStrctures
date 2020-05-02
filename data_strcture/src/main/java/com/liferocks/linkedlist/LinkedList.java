@@ -52,39 +52,63 @@ public class LinkedList {
 
     public void display() {
         Node temp = this.getHead();
-        while (temp != null){
+        while (temp != null) {
             System.out.print(temp.getValue());
             temp = temp.getNextNode();
         }
+        System.out.println();
     }
 
-    public int search(String value) {
+    public Node search(String value) {
         Node temp = this.getHead();
-        boolean found = false;
+        Node n = null;
         int index = 0;
-        while (temp != null){
+        while (temp != null) {
             ++index;
-            if(temp.getValue().equals(value)){
-                found = true;
-                return index;
+            if (temp.getValue().equals(value)) {
+                n = temp;
             }
             temp = temp.getNextNode();
         }
-        if(found){
-            return index;
-        }else{
-            return 0;
-        }
-
+        return n;
     }
 
+    public void delete(String value) {
+        Node h = this.getHead();
+        Node t = this.getTail();
 
+        if (h == null) {
+            System.out.println("List is empty");
+        } else {
+            Node node = this.search(value);
+            if (node == null) {
+                System.out.println("value not present inside list");
+            } else if (node == h) {
+                this.head = h.getNextNode();
+                node.setNextNode(null);
+                if (t == node) {
+                    this.tail = null;
+                    System.out.println("Empty list");
+                }
+            } else {
+                Node nodeBefore = null;
+                Node temp = this.getHead();
+                while (temp != null) {
+                    if (temp.getNextNode() == node) {
+                        nodeBefore = temp;
+                        break;
+                    }
+                    temp = temp.getNextNode();
+                }
+                if (nodeBefore != null) {
+                    nodeBefore.setNextNode(node.getNextNode());
+                    node.setNextNode(null);
+                } else {
+                    /** This case never arise just added safer side*/
+                    System.out.println("Value not present inside list");
+                }
+            }
 
-    @Override
-    public String toString() {
-        return "LinkedList{" +
-                "head=" + head +
-                ", tail=" + tail +
-                '}';
+        }
     }
 }
